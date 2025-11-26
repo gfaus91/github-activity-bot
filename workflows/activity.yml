@@ -1,0 +1,28 @@
+name: Activity Bot
+
+on:
+  schedule:
+    - cron: "0 7 * * *"   # 07:00 UTC
+    - cron: "0 12 * * *"  # 12:00 UTC
+    - cron: "0 0 * * *"  # 0:00 UTC
+  workflow_dispatch:
+
+jobs:
+  activity:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Update activity log
+        run: |
+          echo "Update: $(date -u)" >> activity.log
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_user_name: "Guillermo Faus"
+          commit_user_email: "TU-NOREPLY@users.noreply.github.com"
+          commit_message: "Automated activity update"
+          branch: main
