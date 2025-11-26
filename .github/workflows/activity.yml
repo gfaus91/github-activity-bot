@@ -10,10 +10,12 @@ on:
 jobs:
   activity:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Update activity log
         run: |
@@ -23,6 +25,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_user_name: "Guillermo Faus"
-          commit_user_email: "TU-NOREPLY@users.noreply.github.com"
+          commit_user_email: "48962842+gfaus91@users.noreply.github.com"
           commit_message: "Automated activity update"
+          file_pattern: activity.log
           branch: main
